@@ -1,0 +1,22 @@
+<?php
+return[
+    'name'=>'名前',
+    'age'=>'年齢',
+    'roll_no'=>'ロール番号',
+    'add_student'=>'生徒を追加する',
+    'view_student'=>'学生を見る',
+    'update_student'=>'学生を更新する',
+    'register'=>'登録する',
+    'logout'=>'ログアウト',
+    'delete'=>'削除',
+    'no'=>'番号',
+    'language'=>'言語',
+    'choose_roll_no'=>'ロール番号を選でください。',
+    'update'=>'更新する',
+    'successful'=>'成功',
+    'successful_added'=>'学生が登録されています。',
+    'successful_deleted'=>'生徒が削除されました。',
+    'successful_updated'=>'学生が更新されました。',
+    'date'=>'日付'
+]
+?>
