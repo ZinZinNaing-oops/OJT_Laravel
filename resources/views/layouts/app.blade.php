@@ -73,7 +73,7 @@
                         <li class="nav-item">
                             @auth
                             <a class="nav-link text-success" href="{{ url('/students/delete') }}">
-                                <i class="bi bi-eye-fill" style="font-size: 18px;"></i>Delete Student
+                                <i class="bi bi-person-x-fill" style="font-size: 18px;"></i>@lang('public.delete_student')
                             </a>
                             @endauth
                         </li>

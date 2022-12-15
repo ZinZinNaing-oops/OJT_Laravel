@@ -9,25 +9,29 @@ use DataTables;
 
 class StudentsController extends Controller
 {
-    public function view_student_list(Request $request)
+    public function delete_student_list(Request $request)
     {
         if ($request->ajax()) {
-            $data = Students::select('id', 'name', 'roll_no', 'age','created_at')->get();
+            $data = Students::select('id', 'name', 'roll_no', 'age', 'created_at')->get();
             return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btn = '<button type="button" id="'.$row->id.'" class="btn btn-primary btn-sm delete" >Delete</button>';
+                    $btn = '<button type="button" id="' . $row->id . '" class="btn btn-primary btn-sm delete" >Delete</button>';
                     return $btn;
                 })
+                ->editColumn('created_at', function ($request) {
+                    return $request->created_at->format('Y-m-d'); 
+                })
                 ->rawColumns(['action'])
+                ->addIndexColumn()
                 ->make(true);
         }
-        return view('students.view_student');
+        return view('students.delete_student');
     }
 
-    public function delete_student_list()
+    public function view_student_list()
     {
         $data = Students::all();
-        return view('students.delete_student', ["students" => $data]);
+        return view('students.view_student', ["students" => $data]);
     }
     public function add()
     {
@@ -57,7 +61,6 @@ class StudentsController extends Controller
         return response()->json([
             'student' => $student
         ]);
-      
     }
     public function edit()
     {

@@ -23,11 +23,11 @@ Route::post('/students/add', [
     StudentsController::class,
     'create'
 ]);
-// Route::get('/students/delete', [
-//     StudentsController::class,
-//     'delete_student_list'
-// ]);
 Route::get('/students/delete', [
+    StudentsController::class,
+    'delete_student_list'
+]);
+Route::get('/students/delete_student', [
     StudentsController::class,
     'delete'
 ]);
