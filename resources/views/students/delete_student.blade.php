@@ -3,16 +3,14 @@
 @section('content')
 <div class="container">
     <div class="container row justify-content-center">
-        @if(session('info'))
-        <div class="alert alert-success d-flex flex-row align-items-center justify-content-between" role="alert" style="height: 45px;width:40%">
+        <div class="alert alert-success d-flex flex-row align-items-center justify-content-between d-none" role="alert" style="height: 45px;width:40%;">
             <div>
                 <i class="bi bi-check-circle-fill"></i>
                 <strong> @lang('public.successful') ! </strong>
-                {{ session('info') }}
+                @lang('public.successful_deleted')
             </div>
-            <i class="bi bi-x-lg" style="cursor:pointer" data-bs-dismiss="alert"></i>
+            <i class="bi bi-x-lg" style="cursor:pointer" id="dismiss"></i>
         </div>
-        @endif
         <table class="table table-bordered user_datatable text-center">
             <thead class="text-center">
                 <tr class="table-secondary">
@@ -50,7 +48,40 @@
 </div>
 <script>
     $(document).ready(function() {
-        var table = $('.user_datatable').DataTable({
+        var id;
+        $('#dismiss').click(function() {
+            $('.alert').addClass('d-none').removeClass('d-block');
+        })
+        $(document).on('click', '.delete', function() {
+            id = $(this).attr('id');
+            $("#deleteConfirmModal").modal('show');
+        });
+        $('#yes').click(function() {
+            var deleting = "{{ __('public.deleting') }}";
+            var yes = "{{ __('public.yes') }}";
+            $.ajax({
+                type: 'GET',
+                url: "/students/delete_student/",
+                data: {
+                    'id': id
+                },
+                dataType: "json",
+                beforeSend: function() {
+                    $('#yes').text(deleting);
+                },
+                success: function(data) {
+                    setTimeout(function() {
+                        $('#deleteConfirmModal').modal('hide');
+                        $('#yes').text(yes);
+                        $('.alert').addClass('d-block').removeClass('d-none');
+                        $('.user_datatable').DataTable().ajax.reload();
+
+                    }, 2000);
+                }
+
+            })
+        })
+        $('.user_datatable').DataTable({
             processing: true,
             serverSide: true,
             ajax: '/students/delete',
@@ -62,7 +93,7 @@
                     searchable: false,
                     sortable: false,
                 },
-               
+
                 {
                     data: 'name',
                     name: 'name'
@@ -85,34 +116,24 @@
                     orderable: false,
                     searchable: false
                 }
-            ]
-        });
-        var id;
-        $(document).on('click', '.delete', function() {
-            id = $(this).attr('id');
-            $("#deleteConfirmModal").modal('show');
-        });
-        $('#yes').click(function() {
-            $.ajax({
-                type: 'GET',
-                url: "/students/delete_student/",
-                data: {
-                    'id': id
+            ],
+            language: {
+                "search": "{{ __('public.search') }}",
+                "info": "{{ __('public.info') }}",
+                "infoEmpty": "{{ __('public.infoEmpty') }}",
+                "lengthMenu": "{{ __('public.lengthMenu') }}",
+                "infoFiltered": "{{ __('public.infoFiltered') }}",
+                "emptyTable": "{{ __('public.emptyTable') }}",
+                "zeroRecords": "{{ __('public.zeroRecords') }}",
+                "paginate": {
+                    "first": "{{ __('public.first') }}",
+                    "last": "{{ __('public.last') }}",
+                    "next": "{{ __('public.next') }}",
+                    "previous": "{{ __('public.previous') }}"
                 },
-                dataType: "json",
-                beforeSend: function() {
-                    $('#yes').text('Deleting...');
-                },
-                success: function(data) {
-                    setTimeout(function() {
-                        $('#deleteConfirmModal').modal('hide');
-                        $('#yes').text('Yes');
-                        $('.user_datatable').DataTable().ajax.reload();
-                    }, 2000);
-                }
-
-            })
-        })
+            }
+        });
     })
 </script>
+
 @endsection

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,8 +23,14 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        if ($request->cookie('id' . Auth::user()->id)) {
+            return view('home', ['banner' => "Welcome Again"]);
+        } else {
+            $response = new Response(view('home', ['banner' => "Welcome"]));
+            $response->withCookie(cookie()->forever('id' . Auth::user()->id, Auth::user()->id));
+            return $response;
+        }
     }
 }

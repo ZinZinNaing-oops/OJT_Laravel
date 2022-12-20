@@ -97,8 +97,8 @@
                         @else
                         <li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">@lang('public.language')</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="locale/en">English</a></li>
-                                <li><a class="dropdown-item" href="locale/jp">Japan</a></li>
+                                <li><a class="dropdown-item" href="{{  url('locale/en') }}">@lang('public.english')</a></li>
+                                <li><a class="dropdown-item" href="{{  url('locale/jp') }}">@lang('public.japan')</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">

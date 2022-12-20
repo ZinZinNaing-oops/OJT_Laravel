@@ -9,17 +9,21 @@ use DataTables;
 
 class StudentsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function delete_student_list(Request $request)
     {
         if ($request->ajax()) {
             $data = Students::select('id', 'name', 'roll_no', 'age', 'created_at')->get();
             return Datatables::of($data)->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btn = '<button type="button" id="' . $row->id . '" class="btn btn-primary btn-sm delete" >Delete</button>';
+                    $btn = '<button type="button" id="' . $row->id . '" class="btn btn-danger btn-sm delete" ><i class="bi bi-trash3"></i></button>';
                     return $btn;
                 })
                 ->editColumn('created_at', function ($request) {
-                    return $request->created_at->format('Y-m-d'); 
+                    return $request->created_at->format('Y-m-d');
                 })
                 ->rawColumns(['action'])
                 ->addIndexColumn()
@@ -28,10 +32,25 @@ class StudentsController extends Controller
         return view('students.delete_student');
     }
 
-    public function view_student_list()
+    public function view()
     {
-        $data = Students::all();
-        return view('students.view_student', ["students" => $data]);
+        return view('students.view_student');
+    }
+    public function viewStudentList()
+    {
+        $studentsQuery = Students::query();
+        $date = (!empty($_GET["date"])) ? ($_GET["date"]) : ('');
+        if ($date) {
+            $date = date('Y-m-d', strtotime($date));
+            $studentsQuery->whereRaw("date(students.created_at) = '" . $date . "'");
+        } else {
+        }
+        $students = $studentsQuery->select('id', 'name', 'roll_no', 'age', 'created_at')->get();
+        return datatables()->of($students)
+            ->editColumn('created_at', function ($request) {
+                return $request->created_at->format('Y-m-d');
+            })
+            ->make(true);
     }
     public function add()
     {

@@ -2,20 +2,23 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
             <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
+                @if (isset($banner))
+                    @if($banner!="Welcome Again")
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                        <h5>{{$banner}}</h5>
+                        <img src="{{ asset('img/thank.png') }}" style="width: 50%;height:50%">
+                    </div>
+                    @else
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                        <h5>{{$banner}}</h5>
+                        <img src="{{ asset('img/welcome.png') }}" style="width: 50%;height:50%">
+                    </div>
                     @endif
+                @endif
 
-                    {{ __('You are logged in!') }}
-                </div>
             </div>
         </div>
     </div>

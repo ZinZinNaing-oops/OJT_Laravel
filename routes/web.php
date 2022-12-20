@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\LocalizationController;
+use App\Models\Students;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,9 +17,10 @@ use App\Http\Controllers\LocalizationController;
 */
 
 Auth::routes();
-Route::get('/students/locale/{lange}', [LocalizationController::class, 'setLang']);
+Route::get('/locale/{lange}', [LocalizationController::class, 'setLang']);
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/students/view', [StudentsController::class, 'view_student_list'])->middleware('auth');
+Route::get('/students/view', [StudentsController::class, 'view'])->middleware('auth');
+Route::get('/students/view_student_list',[StudentsController::class,'viewStudentList']);
 Route::get('/students/add', [StudentsController::class, 'add'])->middleware('auth');
 Route::post('/students/add', [
     StudentsController::class,

@@ -52,6 +52,6 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('js/getStudentById.js') }}" defer></script>
+<script src="{{ asset('js/GetStudentById.js') }}" defer></script>
 
 @endsection
