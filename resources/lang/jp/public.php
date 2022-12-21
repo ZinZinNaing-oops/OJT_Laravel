@@ -1,5 +1,17 @@
 <?php
 return[
+    //login and register
+    'email'=>'メールアドレス',
+    'password'=>'パスワード',
+    'login'=>'ログイン',
+    'name'=>'名前',
+    'confirm_password'=>'パスワードの認証',
+    'Register'=>'登録',
+    //title
+    'title'=>'学生管理システム',
+    //welcome message
+    'welcome'=>'いらっしゃいませ。',
+    'thank'=>'ありがとうございました。',
     // student info
     'name'=>'名前',
     'age'=>'年齢',
@@ -16,8 +28,6 @@ return[
     'update'=>'更新する',
     // language
     'language'=>'言語',
-    'english'=>'英語',
-    'japan'=>'日本語',  
     // select option
     'choose_roll_no'=>'ロール番号を選でください。',
     //messages

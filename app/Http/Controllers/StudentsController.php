@@ -61,7 +61,7 @@ class StudentsController extends Controller
         $validator = validator(request()->all(), [
             'name' => 'required',
             'age' => 'required|numeric|min:16|max:30',
-            'roll_no' => 'required|unique:students',
+            'roll_no' => array('required','unique:students','regex:/^([1-5]+)([IS]+)([-]+)([0-9]{1,4})$/')
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();

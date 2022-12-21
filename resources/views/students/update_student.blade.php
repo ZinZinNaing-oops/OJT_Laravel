@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header text-center h4"> @lang('public.update_student')</div>
+                <div class="card-header text-center"> @lang('public.update_student')</div>
                 <div class="card-body">
                     <form class="m-3" method="POST">
                         @method('patch')
@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <div class="d-flex flex-row justify-content-center">
-                            <button class="btn btn-primary" type="submit">@lang('public.update')</button>
+                            <button class="btn" type="submit" style="background-color: #D09CFA;">@lang('public.update')</button>
                         </div>
                     </form>
                 </div>

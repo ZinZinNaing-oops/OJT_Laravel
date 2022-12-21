@@ -14,14 +14,14 @@
         </div>
         @endif
         <p class="d-flex justify-content-end">@lang('public.date'): <input type="text" id="date" name="date"></p>
-        <table class="table table-bordered user_datatable text-center" id="user_datatable">
-            <thead class="text-center">
+        <table class="table table-bordered user_datatable" id="user_datatable">
+            <thead >
                 <tr class="table-secondary">
-                    <th scope="col" class="text-center">@lang('public.num')</th>
-                    <th scope="col" class="text-center">@lang('public.name')</th>
-                    <th scope="col" class="text-center">@lang('public.age')</th>
-                    <th scope="col" class="text-center">@lang('public.roll_no')</th>
-                    <th scope="col" class="text-center">@lang('public.created_at')</th>
+                    <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.num')</th>
+                    <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.name')</th>
+                    <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.age')</th>
+                    <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.roll_no')</th>
+                    <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.created_at')</th>
                 </tr>
             </thead>
             <tbody class="text-center"></tbody>

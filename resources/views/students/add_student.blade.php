@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header text-center h4"> @lang('public.add_student')</div>
+                <div class="card-header text-center"> @lang('public.add_student')</div>
                 <div class="card-body">
                     <form class="m-3" method="post">
                         @csrf
@@ -30,14 +30,15 @@
                         <div class="form-group row mb-4">
                             <label class="col-sm-3 col-form-label">@lang('public.roll_no')</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control @error('roll_no') is-invalid @enderror" name="roll_no" value="{{old('roll_no')}}">
+                                <input type="text" class="form-control @error('roll_no') is-invalid @enderror" name="roll_no" 
+                                    value="{{old('roll_no')}}" placeholder="eg.2IS-1">
                                 @error('roll_no')
                                 <div class="text text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
                         <div class="d-flex flex-row justify-content-center">
-                            <button class="btn btn-primary" type="submit">@lang('public.register')</button>
+                            <button class="btn" type="submit" style="background-color: #D09CFA;">@lang('public.register')</button>
                         </div>
                     </form>
                 </div>

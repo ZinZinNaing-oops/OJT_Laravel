@@ -1,5 +1,17 @@
 <?php
 return[
+    //login and register
+    'email'=>'Email Address',
+    'password'=>'Password',
+    'login'=>'Login',
+    'name'=>'Name',
+    'confirm_password'=>'Confirm Password',
+    'Register'=>'Register',
+     //title
+     'title'=>'Student System',
+    //welcome message
+    'welcome'=>'Welcome',
+    'thank'=>'Thank You',
     // student info
     'name'=>'Name',
     'age'=>'Age',
@@ -15,8 +27,6 @@ return[
     'delete'=>'Delete',
     'update'=>'Update',
     //language
-    'english'=>'English',
-    'japan'=>'Japan',
     'language'=>'Language',
     //select option
     'choose_roll_no'=>'Choose roll number',

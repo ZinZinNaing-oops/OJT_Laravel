@@ -19,8 +19,8 @@ use App\Models\Students;
 Auth::routes();
 Route::get('/locale/{lange}', [LocalizationController::class, 'setLang']);
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/students/view', [StudentsController::class, 'view'])->middleware('auth');
-Route::get('/students/view_student_list',[StudentsController::class,'viewStudentList']);
+Route::get('/students/view', [StudentsController::class, 'view'])->middleware('auth')->name('view');
+Route::get('/students/view_student_list',[StudentsController::class,'viewStudentList'])->name('view');
 Route::get('/students/add', [StudentsController::class, 'add'])->middleware('auth');
 Route::post('/students/add', [
     StudentsController::class,
@@ -34,7 +34,7 @@ Route::get('/students/delete_student', [
     StudentsController::class,
     'delete'
 ]);
-Route::get('/students/update', [StudentsController::class, 'edit']);
+Route::get('/students/update', [StudentsController::class, 'edit'])->middleware('auth');
 Route::get('/students/show', [StudentsController::class, 'getStudentByRollNo']);
 Route::patch('/students/update', [StudentsController::class, 'update']);
 Route::get('/students/showDate', [StudentsController::class, 'getStudentByCreatedDate']);

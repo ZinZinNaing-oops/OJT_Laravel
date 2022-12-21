@@ -6,15 +6,15 @@
         <div class="col-md-6">
             <div class="card">
                 @if (isset($banner))
-                    @if($banner!="Welcome Again")
+                    @if($banner=="first")
                     <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                        <h5>{{$banner}}</h5>
-                        <img src="{{ asset('img/thank.png') }}" style="width: 50%;height:50%">
+                        <h5>@lang('public.welcome')</h5>
+                        <img src="{{ asset('img/welcome.png') }}" style="width: 50%;height:50%">
                     </div>
                     @else
                     <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                        <h5>{{$banner}}</h5>
-                        <img src="{{ asset('img/welcome.png') }}" style="width: 50%;height:50%">
+                        <h5>@lang('public.thank')</h5>
+                        <img src="{{ asset('img/thank.png') }}" style="width: 50%;height:50%">
                     </div>
                     @endif
                 @endif

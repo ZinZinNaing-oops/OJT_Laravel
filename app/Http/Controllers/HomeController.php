@@ -26,9 +26,9 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         if ($request->cookie('id' . Auth::user()->id)) {
-            return view('home', ['banner' => "Welcome Again"]);
+            return view('home', ['banner' => "not first"]);
         } else {
-            $response = new Response(view('home', ['banner' => "Welcome"]));
+            $response = new Response(view('home', ['banner' => "first"]));
             $response->withCookie(cookie()->forever('id' . Auth::user()->id, Auth::user()->id));
             return $response;
         }

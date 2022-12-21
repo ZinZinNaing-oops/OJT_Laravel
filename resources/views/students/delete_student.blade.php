@@ -14,12 +14,12 @@
         <table class="table table-bordered user_datatable text-center">
             <thead class="text-center">
                 <tr class="table-secondary">
-                    <th scope="col" class="text-center">@lang('public.num')</th>
-                    <th scope="col" class="text-center">@lang('public.name')</th>
-                    <th scope="col" class="text-center">@lang('public.age')</th>
-                    <th scope="col" class="text-center">@lang('public.roll_no')</th>
-                    <th scope="col" class="text-center">@lang('public.created_at')</th>
-                    <th scope="col" class="text-center">@lang('public.delete')</th>
+                    <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.num')</th>
+                    <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.name')</th>
+                    <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.age')</th>
+                    <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.roll_no')</th>
+                    <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.created_at')</th>
+                    <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.delete')</th>
                 </tr>
             </thead>
             <tbody class="text-center"></tbody>
