@@ -13,7 +13,54 @@ class StudentsController extends Controller
     {
         $this->middleware('auth');
     }
-    public function delete_student_list(Request $request)
+
+    //view student page
+    public function viewStudents()
+    {
+        return view('students.view_student');
+    }
+    //view student by registered date
+    public function viewStudentsByDate()
+    {
+        $studentsQuery = Students::query();
+        $date = (!empty($_GET["date"])) ? ($_GET["date"]) : ('');
+        if ($date) {
+            $date = date('Y-m-d', strtotime($date));
+            $studentsQuery->whereRaw("date(students.created_at) = '" . $date . "'");
+        } else {
+        }
+        $students = $studentsQuery->select('id', 'name', 'roll_no', 'age', 'created_at')->get();
+        return datatables()->of($students)
+            ->editColumn('created_at', function ($request) {
+                return $request->created_at->format('Y-m-d');
+            })
+            ->make(true);
+    }
+    //add student page
+    public function addStudentView()
+    {
+        return view('students/add_student');
+    }
+    //add student
+    public function addStudent()
+    {
+        $validator = validator(request()->all(), [
+            'name' => 'required|not_regex:/[!@#$%^&*()_+\-=\[\]{};,<>\/?]+/',
+            'age' => 'required|numeric|min:16|max:30',
+            'roll_no' => array('required', 'unique:students', 'regex:/^([1-5]+)([IS]+)([-]+)([0-9]{1,4})$/')
+        ]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+        $student = new Students;
+        $student->name = request()->name;
+        $student->age = request()->age;
+        $student->roll_no = request()->roll_no;
+        $student->save();
+        return redirect('/students/view')->with('info', Lang::get('public.successful_added'));
+    }
+    //delete student page
+    public function deleteStudentView(Request $request)
     {
         if ($request->ajax()) {
             $data = Students::select('id', 'name', 'roll_no', 'age', 'created_at')->get();
@@ -31,49 +78,8 @@ class StudentsController extends Controller
         }
         return view('students.delete_student');
     }
-
-    public function view()
-    {
-        return view('students.view_student');
-    }
-    public function viewStudentList()
-    {
-        $studentsQuery = Students::query();
-        $date = (!empty($_GET["date"])) ? ($_GET["date"]) : ('');
-        if ($date) {
-            $date = date('Y-m-d', strtotime($date));
-            $studentsQuery->whereRaw("date(students.created_at) = '" . $date . "'");
-        } else {
-        }
-        $students = $studentsQuery->select('id', 'name', 'roll_no', 'age', 'created_at')->get();
-        return datatables()->of($students)
-            ->editColumn('created_at', function ($request) {
-                return $request->created_at->format('Y-m-d');
-            })
-            ->make(true);
-    }
-    public function add()
-    {
-        return view('students/add_student');
-    }
-    public function create()
-    {
-        $validator = validator(request()->all(), [
-            'name' => 'required',
-            'age' => 'required|numeric|min:16|max:30',
-            'roll_no' => array('required','unique:students','regex:/^([1-5]+)([IS]+)([-]+)([0-9]{1,4})$/')
-        ]);
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
-        }
-        $student = new Students;
-        $student->name = request()->name;
-        $student->age = request()->age;
-        $student->roll_no = request()->roll_no;
-        $student->save();
-        return redirect('/students/view')->with('info', Lang::get('public.successful_added'));
-    }
-    public function delete(Request $request)
+    //delete student
+    public function deleteStudent(Request $request)
     {
         $student = Students::find($request->id);
         $student->delete();
@@ -81,19 +87,14 @@ class StudentsController extends Controller
             'student' => $student
         ]);
     }
-    public function edit()
+    //update student page
+    public function updateStudentView()
     {
         $data = Students::all();
         return view('students/update_student', ["students" => $data]);
     }
-    public function getStudentByRollNo(Request $request)
-    {
-        $data = Students::filter($request->all())->get();
-        return response()->json([
-            'student' => $data
-        ]);
-    }
-    public function update(Request $request)
+    //update student
+    public function updateStudent(Request $request)
     {
         $validator = validator(request()->all(), [
             'name' => 'required',
@@ -109,7 +110,8 @@ class StudentsController extends Controller
         $student->update();
         return redirect('/students/view')->with('info', Lang::get('public.successful_updated'));
     }
-    public function getStudentByCreatedDate(Request $request)
+    //get student by roll no
+    public function getStudentByRollNo(Request $request)
     {
         $data = Students::filter($request->all())->get();
         return response()->json([

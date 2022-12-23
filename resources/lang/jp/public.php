@@ -17,17 +17,16 @@ return[
     'age'=>'年齢',
     'roll_no'=>'ロール番号',
     // links
-    'add_student'=>'生徒を追加する',
-    'view_student'=>'学生を見る',
-    'update_student'=>'学生を更新する',
-    'delete_student'=>'生徒を削除する',
+    'add_student'=>'追加',
+    'view_student'=>'見る',
+    'update_student'=>'更新',
+    'delete_student'=>'削除',
     // buttons
     'register'=>'登録する',
     'logout'=>'ログアウト',
     'delete'=>'削除',
     'update'=>'更新する',
-    // language
-    'language'=>'言語',
+    'cancel'=>'キャンセル',
     // select option
     'choose_roll_no'=>'ロール番号を選でください。',
     //messages

@@ -15,26 +15,74 @@ use App\Models\Students;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//language change
 Auth::routes();
-Route::get('/locale/{lange}', [LocalizationController::class, 'setLang']);
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/students/view', [StudentsController::class, 'view'])->middleware('auth')->name('view');
-Route::get('/students/view_student_list',[StudentsController::class,'viewStudentList'])->name('view');
-Route::get('/students/add', [StudentsController::class, 'add'])->middleware('auth');
+Route::get('/locale/{lange}', [
+    LocalizationController::class,
+    'setLang'
+]);
+
+//home page
+Route::get('/', [
+    App\Http\Controllers\HomeController::class,
+    'index'
+])->name('home');
+
+//view student page
+Route::get('/students/view', [
+    StudentsController::class, 'viewStudents'
+])->middleware('auth')->name('view');
+
+//view student by registered date
+Route::get('/students/view_student_list', [
+    StudentsController::class,
+    'viewStudentsByDate'
+]);
+
+//add student page
+Route::get('/students/add', [
+    StudentsController::class,
+    'addStudentView'
+])->middleware('auth');
+
+//add student 
 Route::post('/students/add', [
     StudentsController::class,
-    'create'
+    'addStudent'
 ]);
+
+//delete student page
 Route::get('/students/delete', [
     StudentsController::class,
-    'delete_student_list'
+    'deleteStudentView'
 ]);
+
+//delete student
 Route::get('/students/delete_student', [
     StudentsController::class,
-    'delete'
+    'deleteStudent'
 ]);
-Route::get('/students/update', [StudentsController::class, 'edit'])->middleware('auth');
-Route::get('/students/show', [StudentsController::class, 'getStudentByRollNo']);
-Route::patch('/students/update', [StudentsController::class, 'update']);
-Route::get('/students/showDate', [StudentsController::class, 'getStudentByCreatedDate']);
+
+//update student page
+Route::get('/students/update', [
+    StudentsController::class,
+    'updateStudentView'
+])->middleware('auth');
+
+//update student
+Route::patch('/students/update', [
+    StudentsController::class,
+    'updateStudent'
+]);
+
+//show student by roll no
+Route::get('/students/show', [
+    StudentsController::class,
+    'getStudentByRollNo'
+]);
+
+//show student by registered date
+Route::get('/students/showDate', [
+    StudentsController::class,
+    'getStudentByCreatedDate'
+]);

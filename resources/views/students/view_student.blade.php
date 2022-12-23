@@ -15,12 +15,12 @@
         @endif
         <p class="d-flex justify-content-end">@lang('public.date'): <input type="text" id="date" name="date"></p>
         <table class="table table-bordered user_datatable" id="user_datatable">
-            <thead >
+            <thead>
                 <tr class="table-secondary">
                     <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.num')</th>
                     <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.name')</th>
-                    <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.age')</th>
                     <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.roll_no')</th>
+                    <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.age')</th>
                     <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.created_at')</th>
                 </tr>
             </thead>
@@ -37,11 +37,11 @@
         });
         $('#user_datatable').DataTable({
             processing: true,
-            lengthChange:false,
+            lengthChange: false,
             serverSide: true,
             searching: false,
             ajax: {
-                url: "{{ url('/students/view_student_list') }}",
+                url: "{{ url('/students/view_student_list/') }}",
                 type: 'GET',
                 data: function(d) {
                     d.date = $('#date').val();
@@ -77,18 +77,18 @@
                 "search": "{{ __('public.search') }}",
                 "info": "{{ __('public.info') }}",
                 "infoEmpty": "{{ __('public.infoEmpty') }}",
-                "lengthMenu":"{{ __('public.lengthMenu') }}" ,
-                "infoFiltered":"{{ __('public.infoFiltered') }}",
+                "lengthMenu": "{{ __('public.lengthMenu') }}",
+                "infoFiltered": "{{ __('public.infoFiltered') }}",
                 "emptyTable": "{{ __('public.emptyTable') }}",
-                "zeroRecords":"{{ __('public.zeroRecords') }}",
+                "zeroRecords": "{{ __('public.zeroRecords') }}",
                 "paginate": {
                     "first": "{{ __('public.first') }}",
-                    "last":"{{ __('public.last') }}" ,
-                    "next":"{{ __('public.next') }}",
-                    "previous":"{{ __('public.previous') }}"
+                    "last": "{{ __('public.last') }}",
+                    "next": "{{ __('public.next') }}",
+                    "previous": "{{ __('public.previous') }}"
                 },
             }
-           
+
         });
         $('#date').change(function() {
             $('#user_datatable').DataTable().draw(true);

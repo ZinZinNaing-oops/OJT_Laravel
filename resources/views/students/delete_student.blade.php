@@ -16,8 +16,8 @@
                 <tr class="table-secondary">
                     <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.num')</th>
                     <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.name')</th>
-                    <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.age')</th>
                     <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.roll_no')</th>
+                    <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.age')</th>
                     <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.created_at')</th>
                     <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.delete')</th>
                 </tr>
@@ -46,94 +46,22 @@
 
     </div>
 </div>
+
 <script>
-    $(document).ready(function() {
-        var id;
-        $('#dismiss').click(function() {
-            $('.alert').addClass('d-none').removeClass('d-block');
-        })
-        $(document).on('click', '.delete', function() {
-            id = $(this).attr('id');
-            $("#deleteConfirmModal").modal('show');
-        });
-        $('#yes').click(function() {
-            var deleting = "{{ __('public.deleting') }}";
-            var yes = "{{ __('public.yes') }}";
-            $.ajax({
-                type: 'GET',
-                url: "/students/delete_student/",
-                data: {
-                    'id': id
-                },
-                dataType: "json",
-                beforeSend: function() {
-                    $('#yes').text(deleting);
-                },
-                success: function(data) {
-                    setTimeout(function() {
-                        $('#deleteConfirmModal').modal('hide');
-                        $('#yes').text(yes);
-                        $('.alert').addClass('d-block').removeClass('d-none');
-                        $('.user_datatable').DataTable().ajax.reload();
-
-                    }, 2000);
-                }
-
-            })
-        })
-        $('.user_datatable').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: '/students/delete',
-            columns: [{
-                    data: 'SrNo',
-                    render: function(data, type, row, meta) {
-                        return meta.row + meta.settings._iDisplayStart + 1;
-                    },
-                    searchable: false,
-                    sortable: false,
-                },
-
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'roll_no',
-                    name: 'roll_no'
-                },
-                {
-                    data: 'age',
-                    name: 'age'
-                },
-                {
-                    data: 'created_at',
-                    name: 'created_at'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                }
-            ],
-            language: {
-                "search": "{{ __('public.search') }}",
-                "info": "{{ __('public.info') }}",
-                "infoEmpty": "{{ __('public.infoEmpty') }}",
-                "lengthMenu": "{{ __('public.lengthMenu') }}",
-                "infoFiltered": "{{ __('public.infoFiltered') }}",
-                "emptyTable": "{{ __('public.emptyTable') }}",
-                "zeroRecords": "{{ __('public.zeroRecords') }}",
-                "paginate": {
-                    "first": "{{ __('public.first') }}",
-                    "last": "{{ __('public.last') }}",
-                    "next": "{{ __('public.next') }}",
-                    "previous": "{{ __('public.previous') }}"
-                },
-            }
-        });
-    })
+    var search = "{{ __('public.search') }}";
+    var deleting = "{{ __('public.deleting') }}";
+    var yes = "{{ __('public.yes') }}";
+    var info = "{{ __('public.info') }}";
+    var infoEmpty = "{{ __('public.infoEmpty') }}";
+    var lengthMenu = "{{ __('public.lengthMenu') }}";
+    var infoFiltered = "{{ __('public.infoFiltered') }}";
+    var emptyTable = "{{ __('public.emptyTable') }}";
+    var zeroRecords = "{{ __('public.zeroRecords') }}";
+    var first = "{{ __('public.first') }}";
+    var last = "{{ __('public.last') }}";
+    var next = "{{ __('public.next') }}";
+    var previous = "{{ __('public.previous') }}";
 </script>
+<script src="{{ asset('js/DeleteStudent.js') }}" defer></script>
 
 @endsection

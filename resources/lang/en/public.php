@@ -17,17 +17,16 @@ return[
     'age'=>'Age',
     'roll_no'=>'Roll No',
     //links
-    'add_student'=>'Add Student',
-    'view_student'=>'View Student',
-    'delete_student'=>'Delete Student',
-    'update_student'=>'Update Student',
+    'add_student'=>'Add',
+    'view_student'=>'View',
+    'delete_student'=>'Delete',
+    'update_student'=>'Update',
     //buttons
-    'register'=>'Register',
+    'register'=>'Add',
     'logout'=>'logout',
     'delete'=>'Delete',
     'update'=>'Update',
-    //language
-    'language'=>'Language',
+    'cancel'=>'Cancel',
     //select option
     'choose_roll_no'=>'Choose roll number',
     //messages

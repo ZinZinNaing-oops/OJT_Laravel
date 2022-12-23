@@ -35,13 +35,18 @@
     <link href=" https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet">
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js" crossorigin="anonymous">
     </script>
+    <style>
+        .active{
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #D09CFA;">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand {{ Request::is('/') ? 'text-white' : '' }}" href="{{ url('/') }}">
                     @lang('public.title')
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -53,29 +58,29 @@
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             @auth
-                            <a class="nav-link {{ Request::is('students/add') ? 'active' : '' }}" href="{{ url('/students/add') }}">
-                                <i class="bi bi-person-plus-fill" style="font-size: 18px;"></i>@lang('public.add_student')
+                            <a class="nav-link" href="{{ url('/students/add') }}">
+                                <div class="{{ Request::is('students/add') ? 'active' : '' }}"><i class="bi bi-person-plus-fill" style="font-size: 16px;"></i>@lang('public.add_student')</div>
                             </a>
                             @endauth
                         </li>
                         <li class="nav-item">
                             @auth
-                            <a class="nav-link {{ Request::is('students/update') ? 'active' : '' }}" href="{{ url('/students/update') }}">
-                                <i class="bi bi-pencil-square" style="font-size: 18px;"></i>@lang('public.update_student')
+                            <a class="nav-link" href="{{ url('/students/update') }}">
+                                <div class="{{ Request::is('students/update') ? 'active' : '' }}"><i class="bi bi-pencil-square" style="font-size: 16px;"></i>@lang('public.update_student')</div>
                             </a>
                             @endauth
                         </li>
                         <li class="nav-item">
                             @auth
-                            <a class="nav-link {{ Request::is('students/view') ? 'active' : '' }}" href="{{ url('/students/view') }}">
-                                <i class="bi bi-eye-fill" style="font-size: 18px;"></i>@lang('public.view_student')
+                            <a class="nav-link" href="{{ url('/students/view') }}">
+                                <div class="{{ Request::is('students/view') ? 'active' : '' }}"><i class="bi bi-eye-fill" style="font-size: 16px;"></i>@lang('public.view_student')</div>
                             </a>
                             @endauth
                         </li>
                         <li class="nav-item">
                             @auth
-                            <a class="nav-link {{ Request::is('students/delete') ? 'active' : '' }}" href="{{ url('/students/delete') }}">
-                                <i class="bi bi-person-x-fill" style="font-size: 18px;"></i>@lang('public.delete_student')
+                            <a class="nav-link" href="{{ url('/students/delete') }}">
+                               <div class="{{ Request::is('students/delete') ? 'active' : '' }}"> <i class="bi bi-person-x-fill" style="font-size: 16px;"></i>@lang('public.delete_student')</div>
                             </a>
                             @endauth
                         </li>
@@ -83,23 +88,36 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item dropdown"><a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">@lang('public.language')</a>
+                        <li class="nav-item dropdown">
+                            @php $locale = session()->get('locale'); @endphp
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                                @switch($locale)
+                                    @case('en')
+                                      English<img src="{{ asset('img/english.png') }}" style="width: 20px;height:20px;margin-left:5px">
+                                    @break
+                                    @case('jp')
+                                        Japan<img src="{{ asset('img/japan.png') }}" style="width: 20px;height:20px;margin-left:5px">
+                                    @break
+                                    @default
+                                        English<img src="{{ asset('img/english.png') }}" style="width: 20px;height:20px;margin-left:5px">
+                                @endswitch
+                            </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{  url('locale/en') }}">English</a></li>
-                                <li><a class="dropdown-item" href="{{  url('locale/jp') }}">Japan</a></li>
+                                <li><a class="dropdown-item" href="{{  url('locale/en') }}">English<i><img src="{{ asset('img/english.png') }}" style="width: 20px;height:20px;margin-left:5px"></i></a></li>
+                                <li><a class="dropdown-item" href="{{  url('locale/jp') }}">Japan<i><img src="{{ asset('img/japan.png') }}" style="width: 20px;height:20px;margin-left:5px"></i></a></li>
                             </ul>
                         </li>
                         <!-- Authentication Links -->
                         @guest
                         @if (Route::has('login'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">@lang('public.login')</a>
+                            <a class="nav-link" href="{{ route('login') }}"><i class="{{ Request::is('login') ? 'active' : '' }}">@lang('public.login')</i></a>
                         </li>
                         @endif
 
                         @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">@lang('public.Register')</a>
+                            <a class="nav-link" href="{{ route('register') }}"><i class="{{ Request::is('register') ? 'active' : '' }}">@lang('public.Register')</i></a>
                         </li>
                         @endif
                         @else
