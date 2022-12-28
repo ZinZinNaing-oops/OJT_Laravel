@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <div class="container row justify-content-center">
@@ -64,5 +63,4 @@
     var previous = "{{ __('public.previous') }}";
 </script>
 <script src="{{ asset('js/DeleteStudent.js') }}" defer></script>
-
 @endsection

@@ -75,7 +75,8 @@ class StudentsController extends Controller
             return Datatables::of($data)->addIndexColumn()
                 //add column for delete button
                 ->addColumn('action', function ($row) {
-                    $btn = '<button type="button" id="' . $row->id . '" class="btn btn-danger btn-sm delete" ><i class="bi bi-trash3"></i></button>';
+                    $btn = '<button type="button" id="' . $row->id . '" class="btn btn-danger btn-sm delete" ><i class="bi bi-trash3"></i></button>
+                     <a class="btn btn-secondary btn-sm" href="'.route('edit',$row->id).'" ><i class="bi bi-pencil-square"></i></i></a>';
                     return $btn;
                 })
                 //edit column(format date)
@@ -103,27 +104,32 @@ class StudentsController extends Controller
     public function updateStudentView()
     {
         $data = Students::all();
-        return view('students/update', ["students" => $data]);
+        return view('students.update',["students" => $data]);
     }
 
     //update student
-    public function updateStudent(Request $request)
+    public function updateStudent()
     {
         $validator = validator(request()->all(), [
              //require,max length and special character validation of name field
             'name' => 'required|max:50|not_regex:/[!@#$%^&*()_+\-=\[\]{};,<>\/?]+/',
             'age' => 'required|numeric|min:16|max:30',
              // require,unique and format validation of roll-no field
-            'roll_no' => 'required|unique:students',
         ]);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-        $student = Students::find($request->roll_no);
+        $student = Students::find(request()->id);
         $student->name = request()->name;
         $student->age = request()->age;
         $student->update();
         return redirect('/students/view')->with('info', Lang::get('public.successful_updated'));
+    }
+    
+    //update student view by editButton
+    public function updateStudentByEditButton($id){
+        $student = Students::find($id);
+        return view('students/update')->with("student", $student);
     }
 
     //get student by roll no

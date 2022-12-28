@@ -1,12 +1,10 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header text-center"> @lang('public.Register')</div>
-
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}" class="m-3">
                         @csrf
@@ -21,7 +19,6 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="row mb-3">
                             <label for="email" class="col-md-3 col-form-label"> @lang('public.email')</label>
 
@@ -33,7 +30,6 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="row mb-3">
                             <label for="password" class="col-md-3 col-form-label"> @lang('public.password')</label>
 
@@ -45,10 +41,8 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="row mb-3">
                             <label for="password-confirm" class="col-md-3 col-form-label"> @lang('public.confirm_password')</label>
-
                             <div class="col-md-9">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
                             </div>

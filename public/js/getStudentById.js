@@ -1,6 +1,6 @@
 $(document).ready(function() {
-    $('#roll_no').on('change', function() {
-        var selected_roll_no= $('#roll_no').val();
+    $('#id').on('change', function() {
+        var selected_roll_no= $('#id').val();
         if (selected_roll_no != "") {
             $.ajax({
                 type: 'GET',
