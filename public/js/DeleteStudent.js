@@ -1,14 +1,15 @@
 $(document).ready(function() {
     var id;
+    //successful msg hide when click cross button
     $('#dismiss').click(function() {
         $('.alert').addClass('d-none').removeClass('d-block');
     })
+    //when click delet button , show modal
     $(document).on('click', '.delete', function() {
         id = $(this).attr('id');
         $("#deleteConfirmModal").modal('show');
     });
     $('#yes').click(function() {
-
         $.ajax({
             type: 'GET',
             url: "/students/delete_student/",
@@ -25,7 +26,6 @@ $(document).ready(function() {
                     $('#yes').text(yes);
                     $('.alert').addClass('d-block').removeClass('d-none');
                     $('.user_datatable').DataTable().ajax.reload();
-
                 }, 2000);
             }
 
@@ -43,7 +43,6 @@ $(document).ready(function() {
                 searchable: false,
                 sortable: false,
             },
-
             {
                 data: 'name',
                 name: 'name'

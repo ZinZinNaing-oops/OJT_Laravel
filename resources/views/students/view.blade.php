@@ -25,7 +25,6 @@
                 </tr>
             </thead>
             <tbody class="text-center"></tbody>
-
         </table>
     </div>
 </div>
@@ -36,6 +35,7 @@
             dateFormat: 'yy-mm-dd'
         });
         $('#user_datatable').DataTable({
+            //data table attribute show or hide
             processing: true,
             lengthChange: false,
             serverSide: true,
@@ -47,9 +47,12 @@
                     d.date = $('#date').val();
                 }
             },
-            columns: [{
+            columns: [
+                //add No column 
+                {
                     data: 'SrNo',
                     render: function(data, type, row, meta) {
+                        //value in No column(auto increment)
                         return meta.row + meta.settings._iDisplayStart + 1;
                     },
                     searchable: false,

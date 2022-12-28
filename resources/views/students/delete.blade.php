@@ -48,6 +48,7 @@
 </div>
 
 <script>
+    // text for language
     var search = "{{ __('public.search') }}";
     var deleting = "{{ __('public.deleting') }}";
     var yes = "{{ __('public.yes') }}";
