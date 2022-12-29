@@ -18,7 +18,7 @@
                     <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.roll_no')</th>
                     <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.age')</th>
                     <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.created_at')</th>
-                    <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.delete')</th>
+                    <th scope="col" class="text-center" style="background-color: #D09CFA;">@lang('public.action')</th>
                 </tr>
             </thead>
             <tbody class="text-center"></tbody>

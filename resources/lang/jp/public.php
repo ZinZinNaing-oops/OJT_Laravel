@@ -38,6 +38,7 @@ return[
     'num'=>'番号',
     'date'=>'日付',
     'created_at'=>'登録日',
+    'action'=>'アクション',
     //delete confirm modal info
     'delete_confirm'=>'本当にこの生徒を削除しますか?',
     'yes'=>'はい',

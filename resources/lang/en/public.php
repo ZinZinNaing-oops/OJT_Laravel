@@ -8,7 +8,8 @@ return[
     'confirm_password'=>'Confirm Password',
     'Register'=>'Register',
      //title
-     'title'=>'Student System',
+     'title'=>'Student Information System',
+     
     //welcome message
     'welcome'=>'Welcome',
     'thank'=>'Thank You',
@@ -38,6 +39,7 @@ return[
     'num'=>'No',
     'date'=>"Date",
     'created_at'=>"Registered Date",
+    'action'=>"Action",
     //delete confirm modal info
     'delete_confirm'=>'Are you sure you want to delete this student?',
     'yes'=>'Yes',
